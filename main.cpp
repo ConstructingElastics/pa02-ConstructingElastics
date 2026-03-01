@@ -173,7 +173,6 @@ int main(int argc, char** argv){
         
     }
 
-
     //the best movie
     for (int i = 0; i < prefixes.size(); i++){
         string prefix = prefixes[i];
@@ -202,11 +201,6 @@ int main(int argc, char** argv){
         }
         
     }
-
-
-    //  For each prefix,
-    //  Print the highest rated movie with that prefix if it exists.
-    cout << "Best movie with prefix " << "<replace with prefix>" << " is: " << "replace with movie name" << " with rating " << std::fixed << std::setprecision(1) << "replace with movie rating" << endl;
 
     return 0;
 }
