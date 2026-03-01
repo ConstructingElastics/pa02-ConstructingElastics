@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <chrono>
 #include <ctime>
 #include <vector>
 #include <cstring>
@@ -136,6 +137,7 @@ int main(int argc, char** argv){
 
     //for each prefix...
 
+
     //listing them out
     for (int i = 0; i < prefixes.size(); i++){
         string prefix = prefixes[i];
@@ -201,11 +203,43 @@ int main(int argc, char** argv){
         }
         
     }
-
+ 
     return 0;
 }
 
 /* Add your run time analysis for part 3 of the assignment here as commented block*/
+
+/*
+TIME COMPLEXITY
+First we do an m loop, and then loop through all the movies that have that prefix, so k, seems like m + k so far.
+Then we do an m loop, and then loop through the first movie, (most of the time) or movies with the highest rating so it *could* be considered as k, but its really much smaller most of the time.
+Therefore the total runtime should be around O(m + k)
+*/
+
+/*
+RUNTIMES
+rand20: 300 ms
+rand100: 342 ms
+rand1000: 295 ms
+rand76920: 1543 ms
+*/
+
+/*
+SPACE COMPLEXITY
+The space complexity of this algorithm is O(n+m) because we store m keys and a total of n values (inside all the sets), and then we also store another m values in a vector, but that can be factored into m since we dont write 2m.
+*/
+
+/*
+QUESTION : Optimized for Time Complexity
+
+I implemented this with the goal of faster time complexity in mind for the sake of the runtime competition. 
+I used a hash map storing BSTs of the movies linked to their prefixes so I could access a set of movies starting with a prefix in constant time.
+I used BSTs to store the movies for their automatic sorting property.
+Having the rating in descending order while alphabhetically in ascending order proved a minor challenge but I lazily just put movies of the same rating in a new BST to have it sort for me again.
+I believe my space complexity was reasonable, and I don't see a convenient way to massively reduce it.
+I think the minimum space complexity required is at least O(n+m) and my space complexity fits within that although its a little bigger and more like O(n+2m) if that was a real space complexity.
+*/
+
 
 bool parseLine(string &line, string &movieName, double &movieRating) {
     int commaIndex = line.find_last_of(",");
